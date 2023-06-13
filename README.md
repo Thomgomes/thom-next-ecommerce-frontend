@@ -33,4 +33,3 @@ Instale as dependecias com
     yarn dev
 ```
 
-git commit -m "Header e featured em andamento, associação com banco de dados e link para ReadMore criados"
