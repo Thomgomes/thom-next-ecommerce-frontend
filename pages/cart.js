@@ -52,8 +52,9 @@ const SpanName = styled.span`
 `
 
 export default function CartPage() {
-    const { cartProducts, addProduct } = useContext(CartContext)
+    const { cartProducts, addProduct, removeProduct } = useContext(CartContext)
     const [products, setProducts] = useState([])
+    // const [price, setPrice] = useState(0)
 
     useEffect(() => {
         if (cartProducts.length > 0) {
@@ -68,7 +69,12 @@ export default function CartPage() {
         addProduct(id)
     }
     function lessOfThisProduct(id) {
-        addProduct(id)
+        removeProduct(id)
+    }
+    let total = 0
+    for (const productId of cartProducts) {
+        const price = products.find(p => p._id === productId)?.price || 0
+        total += price
     }
     return (
         <>
@@ -98,7 +104,7 @@ export default function CartPage() {
                                                 </ProductImageBox>
                                                 <SpanName>
 
-                                                {product.title}
+                                                    {product.title}
                                                 </SpanName>
                                             </ProductInfoCell>
                                             <td>
@@ -113,7 +119,11 @@ export default function CartPage() {
                                             </td>
                                         </tr>
                                     ))}
-
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>R${total}</td>
+                                    </tr>
                                 </tbody>
                             </Table>
                         )}
